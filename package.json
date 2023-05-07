@@ -1,0 +1,12 @@
+{
+  "name": "woodstock",
+  "workspaces": [
+    "packages/ui",
+    "packages/api",
+    "packages/common"
+  ],
+  "scripts": {
+    "dev-ui": "npm run dev --workspace @woodstock/ui",
+    "dev-api": "npm run dev --workspace @woodstock/api"
+  }
+}
