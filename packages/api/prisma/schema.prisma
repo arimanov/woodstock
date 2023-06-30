@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  email             String  @unique
+  password          String
+  name              String?
+  additionalInfo    String?
+  createdAt         DateTime
+  inboundTran       Transactions[]  @relation("InboundTran")
+  outboundTran      Transactions[]  @relation("OutboundTran")
+}
+
+model Transactions {
+  transactionUid    String @id
+  transactionTypeId Int
+  transactionType   TransactionsType @relation(fields: [transactionTypeId], references: [id])
+  approved          Boolean @default(false)
+  inbound           Account?    @relation("InboundTran", fields: [inboundAccountId], references: [id])
+  inboundAccountId  Int?
+  outbound          Account?    @relation("OutboundTran", fields: [outboundAccountId], references: [id])
+  outboundAccountId Int?
+  issuedDate        DateTime
+  amount            Int
+  comment           String?
+}
+
+model TransactionsType {
+    id                Int     @id @default(autoincrement())
+    typeTitle         String
+    transactions      Transactions[]
+}

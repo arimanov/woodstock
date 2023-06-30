@@ -1,20 +1,27 @@
-import express from "express"
+import { PrismaClient } from '@prisma/client';
 import { Account } from "@woodstock/common/Account";
+import express from 'express';
 
 const app = express();
-const port = 8080; // default port to listen
+const port = 8080;
 
-const x:Account = {
-    id: "1",
-    createdAt: "",
-};
+const prisma = new PrismaClient();
 
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    res.send( "Hello world!" );
-} );
+app.get("/", async (req, res) => {
+  const users = await prisma.account.findMany()
+  res.send(users);
+});
 
-// start the Express server
-app.listen( port, () => {
-    console.log( `server started at http://localhost:${ port }` );
-} );
+app.post("/test-add", async (req, res) => {
+  await prisma.account.create({ data: {
+    email: 'mail@test',
+    name: 'Test',
+    password: 'Password',
+    createdAt: new Date()
+  }})
+  res.send("201");
+});
+
+app.listen(port, () => {
+  console.log(`server started at http://localhost:${port}`);
+});
