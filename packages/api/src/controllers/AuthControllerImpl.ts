@@ -31,7 +31,7 @@ class AuthControllerImpl extends AbstractController implements IAuthController {
         || !existingUser.id
         || !existingUser.email
         || !await bcrypt.compare(password, existingUser.password)) {
-      return this.sendError(res,403, 'Unauthorized');
+      return this.sendError(res,401, 'Unauthorized');
     }
 
     const loginResponse: LoginResponse = {

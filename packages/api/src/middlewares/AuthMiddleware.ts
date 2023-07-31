@@ -1,4 +1,4 @@
-import {NextFunction, Response} from 'express';
+import { NextFunction, Response } from 'express';
 import IAuthController from 'controllers/IAuthController';
 import { CustomRequest } from 'models/CustomRequest';
 

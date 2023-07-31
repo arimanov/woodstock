@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { LoginRequest, SignUpRequest } from '@woodstock/common/Requests';
 import { LoginResponse, SignUpResponse } from '@woodstock/common/Responses';
