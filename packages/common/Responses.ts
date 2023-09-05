@@ -9,10 +9,11 @@ export interface LoginResponse {
     tokenType: string,
 }
 
-export interface Account {
+export interface AccountResponse {
     id: string,
     email: string,
     name: string,
     additionalInfo: string,
     createdAt: string,
+    balance: number,
 }
